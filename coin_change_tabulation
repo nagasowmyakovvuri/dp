@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dp[100001];
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	int s;
+	cin>>s;
+	int a[s];
+ 	//memset(dp,0,sizeof(dp));
+ 	vector<int>dp(n+1,INT_MAX);
+ 	dp[0]=0;
+	for(int i=0;i<s;i++)
+	{
+	    cin>>a[i];
+	}
+// 	if(fun(n,s,a)==INT_MAX)cout<<-1;
+// 	else
+// 	cout<<fun(n,s,a);
+for(int i=1;i<=n;i++)
+{
+    for(int j=0;j<=s;j++)
+    {
+        if(i>=a[j])
+        {
+            dp[i]=min(dp[i-a[j]]+1,dp[i]);
+        }
+    }
+   
+}
+ cout<<dp[n];	
+
+}
