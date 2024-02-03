@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+// dp->recursion
+// int dp[10001][10001];
+// int fun(int i,int j,int a[],int n)
+// {
+//     if(i==j)
+//     {
+//         return (n-(j-i))*a[i];
+//     }
+//     if(dp[i][j]!=-1)return dp[i][j];
+//     int left=(n-(j-i))*a[i]+fun(i+1,j,a,n);
+//     int right=(n-(j-i))*a[j]+fun(i,j-1,a,n);
+//     return dp[i][j]=max(left,right);
+// }
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+   // memset(dp,-1,sizeof(dp));
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    //cout<<fun(0,n-1,a,n);
+    
+    //tabulation
+    vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+    for(int i=0;i<n;i++)
+    {
+        dp[i][i]=(n)*a[i];
+    }
+    // for(int i=0;i<n;i++)
+    // {
+    //     //cout<<dp[i][i]<<" ";
+    // }
+    for(int k=1;k<=n;k++)
+    {
+        int i=0,j=k;
+        
+        while(j<n)
+        {
+           // cout<<i<<" "<<j<<endl;
+            int y=n-(j-i);
+            dp[i][j]=max(y*a[i]+dp[i+1][j],y*a[j]+dp[i][j-1]);
+            j++;
+            i++;
+        }
+    }
+    cout<<dp[0][n-1];
+}
